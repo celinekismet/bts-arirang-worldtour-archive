@@ -1,34 +1,43 @@
+import type { EventMedia } from "../../media/entities/event-media.entity";
+import type { Outfits } from "../../outfits/entities/outfits.entity";
+import type { Highlights } from "../../highlights/entities/highlights.entity";
+import type { HitTweets } from "../../hit-tweets/entities/hit-tweets.entity";
+import { PrimaryGeneratedColumn } from "typeorm";
+import { IsString, IsDateString, IsArray } from "class-validator";
+
 export class CreateEventDto {
+
     @PrimaryGeneratedColumn('uuid')
+    @IsString()
     id: string;
 
-    @Column({ type: 'date'})
+    @IsDateString()
     date: Date;
 
-    @Column()
+    @IsString()
     country: string;
 
-    @Column()
+    @IsString()
     city: string;
 
-    @Column()
+    @IsString()
     venue: string;
 
-    @Column('simple-array', { nullable: true })
+    @IsArray()
     setlist: string[];
 
-    @Column('simple-array', { nullable: true })
+    @IsArray()
     surpriseSongs: string[];
 
-    @OneToMany(() => EventMedia, (eventMedia) => eventMedia.event, { cascade: true })
+    @IsArray()
     media: EventMedia[];
 
-    @OneToMany(() => Outfits, (outfits) => outfits.event, { cascade: true })
+    @IsArray()
     outfits: Outfits[];
 
-    @OneToMany(() => Highlights, (highlights) => highlights.event, { cascade: true })
+    @IsArray()
     highlights: Highlights[];
 
-    @OneToMany(() => HitTweets, (hitTweets) => hitTweets.event, { cascade: true })
+    @IsArray()
     hitTweets: HitTweets[];
 }

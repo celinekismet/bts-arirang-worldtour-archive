@@ -1,4 +1,7 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { HitTweet } from "../../hit-tweets/entities/hit-tweet.entity.js";
+import { Media } from "../../media/entities/media.entity.js";
+import { Outfit } from "../../outfits/entities/outfit.entity.js";
 
 @Entity()
 export class Event {
@@ -24,15 +27,15 @@ export class Event {
     @Column('simple-array', { nullable: true })
     surpriseSongs: string[];
 
-    @OneToMany(() => EventMedia, (eventMedia) => eventMedia.event, { cascade: true })
-    media: EventMedia[];
+    @OneToMany(() => Media, (media) => media.event, { cascade: true })
+    media: Media[];
 
-    @OneToMany(() => Outfits, (outfits) => outfits.event, { cascade: true })
-    outfits: Outfits[];
+    @OneToMany(() => Outfit, (outfit) => outfit.event, { cascade: true })
+    outfit: Outfit[];
 
-    @OneToMany(() => Highlights, (highlights) => highlights.event, { cascade: true })
-    highlights: Highlights[];
+    @OneToMany(() => Highlight, (highlight) => highlight.event, { cascade: true })
+    highlight: Highlight[];
 
-    @OneToMany(() => HitTweets, (hitTweets) => hitTweets.event, { cascade: true })
-    hitTweets: HitTweets[];
+    @OneToMany(() => HitTweet, (tweet) => tweet.event, { cascade: true })
+    tweets: HitTweet[];
 }

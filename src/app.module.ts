@@ -5,10 +5,18 @@ import { EventsModule } from './events/events.module.js';
 import { MediaModule } from './media/media.module.js';
 import { HitTweetsModule } from './hit-tweets/hit-tweets.module.js';
 import { OutfitsModule } from './outfits/outfits.module.js';
-import { HightlightsModule } from './hightlights/hightlights.module.js';
+import { HighlightsModule } from './highlights/highlights.module.js';
+import { CommunityModule } from './community/community.module.js';
 
 @Module({
-  imports: [EventsModule, MediaModule, HitTweetsModule, OutfitsModule, HightlightsModule],
+  imports: [
+    EventsModule, 
+    MediaModule, 
+    HitTweetsModule, 
+    OutfitsModule, 
+    HighlightsModule, 
+    CommunityModule
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
