@@ -1,5 +1,5 @@
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
-import { CommunityCategories } from "../../config/config/enum/CommunityCategories.enum.js";
+import { CommunityCategories } from "../../../config/config/enum/CommunityCategories.enum.js";
 
 @Entity()
 export class Community {
