@@ -1,8 +1,8 @@
 import { Column, Entity, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
-import { MediaType } from "../../config/config/enum/MediaType.enum.js";
 import { Event } from "../../events/entities/event.entity.js";
 import { Highlight } from "../../highlights/entities/highlight.entity.js";
 import { Member } from "../../member/entities/member.entity.js";
+import { MediaType } from "../../../config/config/enum/MediaType.enum.js";
 
 /**
  * Represents a media entity in the application.
