@@ -7,6 +7,9 @@ import { HitTweetsModule } from './hit-tweets/hit-tweets.module.js';
 import { OutfitsModule } from './outfits/outfits.module.js';
 import { HighlightsModule } from './highlights/highlights.module.js';
 import { CommunityModule } from './community/community.module.js';
+import { LocationModule } from './location/location.module.js';
+import { MemberModule } from './member/member.module.js';
+import { SurpriseSongModule } from './surprise-song/surprise-song.module.js';
 
 @Module({
   imports: [
@@ -15,7 +18,7 @@ import { CommunityModule } from './community/community.module.js';
     HitTweetsModule, 
     OutfitsModule, 
     HighlightsModule, 
-    CommunityModule
+    CommunityModule, LocationModule, MemberModule, SurpriseSongModule
   ],
   controllers: [AppController],
   providers: [AppService],

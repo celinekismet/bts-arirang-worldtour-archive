@@ -4,8 +4,8 @@ import { CommunityCategories } from "../../config/config/enum/CommunityCategorie
 @Entity()
 export class Community {
 
-    @PrimaryGeneratedColumn('uuid')
-    id: string;
+    @PrimaryGeneratedColumn()
+    communityId: number;
 
     @Column()
     name: string;
