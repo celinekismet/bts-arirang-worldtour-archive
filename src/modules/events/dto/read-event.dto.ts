@@ -27,36 +27,30 @@ export class ReadEventDto {
    */
   attendance: number;
 
-  /**
-   * The city and country of the event.
-   */
+  /** The location where the event took place. */
   location: {
-    city: string;
+    locationId: number;
     country: string;
+    city: string;
+    venue: string;
   };
 
-  /**
-   * The outfits associated with the event.
-   */
+  /** The outfits worn at the event. */
   outfits: { outfitId: number; name: string }[];
 
-  /**
-   * The surprise songs performed at the event.
-   */
+  /** The surprise songs performed at the event. */
   surpriseSongs: { surpriseSongId: number; title: string }[];
 
-  /**
-   * The media (photos/videos) associated with the event.
-   */
+  /** The media (photos/videos) associated with the event. */
   media: { mediaId: number; url: string; type: string }[];
 
-  /**
-   * The highlights of the event.
-   */
-  highlights: { highlightId: number; description: string }[];
+  /** The highlights of the event. */
+  highlights: {
+    highlightId: number;
+    title: string;
+    description: string;
+  }[];
 
-  /**
-   * The hit tweets associated with the event.
-   */
+  /** The hit tweets associated with the event. */
   tweets: { hitTweetId: number; tweetUrl: string }[];
 }

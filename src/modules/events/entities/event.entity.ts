@@ -27,7 +27,7 @@ export class Event {
     /**
      * The setlist for the event, stored as a simple array of strings. This field is optional and can be null.
      */
-    @Column('simple-array', { nullable: true })
+    @Column('text', { array: true })
     setlist: string[];
 
     /**

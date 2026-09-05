@@ -16,10 +16,10 @@ export class Community {
     @Column({ type: 'enum', enum: CommunityCategories })
     category: CommunityCategories;
 
-    @Column()
+    @Column('text', { array: true })
     platforms: string[];
 
-    @Column()
+    @Column('text', { array: true})
     links: string[];
 
 }

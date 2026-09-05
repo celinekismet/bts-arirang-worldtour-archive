@@ -1,10 +1,11 @@
-import { Column, ManyToMany, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToMany, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Event } from "../../events/entities/event.entity.js";
 import { SurpriseSong } from "../../surprise-song/entities/surprise-song.entity.js";
 
 /**
  * Represents a location entity in the application.
  */
+@Entity()
 export class Location {
 
     /** The unique identifier for the location. */

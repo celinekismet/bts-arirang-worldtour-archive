@@ -1,4 +1,4 @@
-import { Column, ManyToMany, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToMany, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Outfit } from "../../outfits/entities/outfit.entity.js";
 import { Media } from "../../media/entities/media.entity.js";
 import { Highlight } from "../../highlights/entities/highlight.entity.js";
@@ -6,6 +6,7 @@ import { Highlight } from "../../highlights/entities/highlight.entity.js";
 /**
  *  Represents a member entity in the application.
  */
+@Entity()
 export class Member {
 
     /** The unique identifier for the member. */
