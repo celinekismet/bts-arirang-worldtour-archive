@@ -1,4 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
+import type { Relation } from "typeorm";
 import { Event } from "../../events/entities/event.entity.js";
 import { Highlight } from "../../highlights/entities/highlight.entity.js";
 
@@ -23,7 +24,7 @@ export class HitTweet {
 
     /** The event associated with the tweet. */
     @ManyToOne(() => Event, (event) => event.tweets, { onDelete: 'CASCADE' })
-    event: Event;
+    event: Relation<Event>;
 
     /** The highlight associated with the tweet. */
     @ManyToOne(() => Highlight, (highlight) => highlight.tweets, {

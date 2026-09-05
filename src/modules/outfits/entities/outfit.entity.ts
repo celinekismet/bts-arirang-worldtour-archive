@@ -1,4 +1,5 @@
-import { Column, Entity, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinTable, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import type { Relation } from "typeorm";
 import { Event } from "../../events/entities/event.entity.js";
 import { Member } from "../../member/entities/member.entity.js";
 
@@ -27,9 +28,9 @@ export class Outfit {
     /** The events associated with the outfit. */
     @ManyToMany(() => Event, (event) => event.outfits)
     @JoinTable()
-    events: Event[];
+    events: Relation<Event[]>;
 
     /** The member associated with the outfit. */
     @ManyToOne(() => Member, (member) => member.outfits)
-    member: Member;
+    member: Relation<Member>;
 }

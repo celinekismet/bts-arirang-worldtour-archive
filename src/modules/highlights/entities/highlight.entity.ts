@@ -1,4 +1,5 @@
 import { Column, Entity, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import type { Relation } from "typeorm";
 import { Media } from "../../media/entities/media.entity.js";
 import { Event } from "../../events/entities/event.entity.js";
 import { HitTweet } from "../../hit-tweets/entities/hit-tweet.entity.js";
@@ -31,7 +32,7 @@ export class Highlight {
 
     /** The event associated with the highlight. */
     @ManyToOne(() => Event, (event) => event.highlights, { onDelete: 'CASCADE' })
-    event: Event;
+    event: Relation<Event>;
 
     /** The hit tweets associated with the highlight. */
     @OneToMany(() => HitTweet, (tweet) => tweet.highlight, { cascade: true })

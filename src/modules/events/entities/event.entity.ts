@@ -1,4 +1,5 @@
 import { Column, Entity, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import type { Relation } from "typeorm";
 import { HitTweet } from "../../hit-tweets/entities/hit-tweet.entity.js";
 import { Media } from "../../media/entities/media.entity.js";
 import { Outfit } from "../../outfits/entities/outfit.entity.js";
@@ -64,20 +65,20 @@ export class Event {
      * The highlights associated with the event.
      */
     @OneToMany(() => Highlight, (highlight) => highlight.event, { cascade: true })
-    highlights: Highlight[];
+    highlights: Relation<Highlight[]>;
 
     /**
      * The hit tweets associated with the event.
      */
     @OneToMany(() => HitTweet, (tweet) => tweet.event, { cascade: true })
-    tweets: HitTweet[];
+    tweets: Relation<HitTweet[]>;
 
     /**
      * The surprise songs associated with the event.
      */
     @ManyToMany(() => SurpriseSong, (surpriseSong) => surpriseSong.events)
     @JoinTable()
-    surpriseSongs: SurpriseSong[];
+    surpriseSongs: Relation<SurpriseSong[]>;
 
     /**
      * The location associated with the event.

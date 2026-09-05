@@ -1,4 +1,5 @@
 import { Column, Entity, ManyToMany, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import type { Relation } from "typeorm";
 import { Outfit } from "../../outfits/entities/outfit.entity.js";
 import { Media } from "../../media/entities/media.entity.js";
 import { Highlight } from "../../highlights/entities/highlight.entity.js";
@@ -23,7 +24,7 @@ export class Member {
 
     /** The outfits associated with the member. */
     @OneToMany(() => Outfit, (outfit) => outfit.member)
-    outfits: Outfit[];
+    outfits: Relation<Outfit[]>;
 
     /** The highlights associated with the member. */
     @ManyToMany(() => Highlight, (highlight) => highlight.members)
@@ -31,6 +32,6 @@ export class Member {
 
     /** The media associated with the member. */
     @ManyToMany(() => Media, (media) => media.members)
-    media: Media[];
+    media: Relation<Media[]>;
 
 }

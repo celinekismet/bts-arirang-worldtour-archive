@@ -1,5 +1,5 @@
 import { IsArray, IsInt } from "class-validator";
-import { IsString } from "class-validator/types/decorator/typechecker/IsString.js";
+import { IsString } from "class-validator";
 
 export class CreateHighlightDto {
 
