@@ -35,7 +35,25 @@ export class EventsService {
   }
 
   async update(id: number, dto: UpdateEventDto): Promise<Event | null> {
-    await this.eventsRepository.update(id, dto);
+    const { locationId, outfitIds, surpriseSongIds, ...eventFields } = dto;
+
+    this.eventsRepository.update(id, {
+      ...eventFields,
+      ...( location !== undefined && { location: { locationId }}),
+      });
+
+    if (outfitIds || surpriseSongIds) {
+      const event = await this.eventsRepository.findOneBy({ eventId: id});
+      if (event){
+        if(outfitIds){
+          event.outfits = outfitIds.map((outfitId) => ({outfitId}) as any)
+        }
+        if(surpriseSongIds){
+          event.surpriseSongs = surpriseSongIds.map((surpriseSongId) => ({surpriseSongId}) as any)
+        }
+        await this.eventsRepository.save(event);
+      }
+    }
     return this.findOne(id);
   }
 

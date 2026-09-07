@@ -2,12 +2,21 @@ import { Injectable } from '@nestjs/common';
 import { CreateCommunityDto } from './dto/create-community.dto.js';
 import { UpdateCommunityDto } from './dto/update-community.dto.js';
 import { JwtAuthGuard } from '../../auth/jwt-auth.guard.js';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Community } from './entities/community.entity.js';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class CommunityService {
 
-  create(createCommunityDto: CreateCommunityDto) {
-    return 'This action adds a new community';
+  constructor(
+    @InjectRepository(Community)
+    private readonly communityRepository: Repository<Community>
+  ){}
+
+  create(createCommunityDto: CreateCommunityDto): Promise<Community> {
+    const community = this.communityRepository.create(createCommunityDto);
+    return this.communityRepository.save(community);
   }
 
   findAll() {
