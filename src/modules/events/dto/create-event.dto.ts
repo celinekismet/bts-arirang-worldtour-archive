@@ -15,7 +15,7 @@ export class CreateEventDto {
    * The date of the event.
    */
   @IsDateString()
-  date: string;
+  date: Date;
 
   /**
    * The setlist of the event.

@@ -1,9 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { CreateCommunityDto } from './dto/create-community.dto.js';
 import { UpdateCommunityDto } from './dto/update-community.dto.js';
+import { JwtAuthGuard } from '../../auth/jwt-auth.guard.js';
 
 @Injectable()
 export class CommunityService {
+
   create(createCommunityDto: CreateCommunityDto) {
     return 'This action adds a new community';
   }
@@ -11,7 +13,6 @@ export class CommunityService {
   findAll() {
     return `This action returns all community`;
   }
-
   findOne(id: number) {
     return `This action returns a #${id} community`;
   }
