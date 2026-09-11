@@ -13,7 +13,16 @@ export class HighlightsService {
     private readonly highlightsRepository: Repository<Highlight>
    ){}
   create(createHighlightDto: CreateHighlightDto) {
-    return 'This action adds a new highlight';
+     const { mediaIds, eventId, tweetIds, memberIds, ...highlightFields} = createHighlightDto;
+
+     const highlight = this.highlightsRepository.create({
+      ...highlightFields,
+      media: mediaIds?.map((id) => ({ id })),
+      event: { eventId },
+      tweets: tweetIds?.map((id) => ({hitTweetId: id})),
+      members: memberIds?.map((id) => ({memberId: id}))
+     })
+     return this.highlightsRepository.save(highlight);
   }
 
   findAll():Promise<Highlight[]> {
@@ -32,11 +41,17 @@ export class HighlightsService {
     })
   }
 
-  update(id: number, updateHighlightDto: UpdateHighlightDto) {
-    return `This action updates a #${id} highlight`;
+  async update(id: number, updateHighlightDto: UpdateHighlightDto): Promise<Highlight | null> {
+    const { mediaIds, eventId, tweetIds, memberIds, ...highlightFields} = updateHighlightDto;
+
+    await this.highlightsRepository.update( id, {
+      ...highlightFields,
+      ...(eventId !== undefined && { event : { eventId }})
+    })
+    return this.findOne(id);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} highlight`;
+  remove(id: number): Promise<void> {
+    return this.highlightsRepository.delete(id).then(() => undefined)
   }
 }

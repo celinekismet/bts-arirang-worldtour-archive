@@ -1,35 +1,28 @@
-import { IsArray, IsInt } from "class-validator";
-import { IsString } from "class-validator";
+import { IsArray, IsInt, IsString, IsOptional } from "class-validator";
 
 export class CreateHighlightDto {
 
-       highlightId: number;
-    
-        /** The title of the highlight. */
-        @IsString()
-        title: string;
-    
-        /** The description of the highlight. */
-        @IsString()
-        description: string;
-    
-        /** The media associated with the highlight. */
-        @IsInt({ each: true })
-        @IsArray()
-        mediaIds: number[];
-    
-        /** The event associated with the highlight. */
-        @IsInt()
-        eventId: number;
+    @IsString()
+    title: string;
 
-        /** The hit tweets associated with the highlight. */
-        @IsInt({ each: true })
-        @IsArray()
-        tweetIds: number[];
+    @IsString()
+    description: string;
 
-        /** The member associated with the highlight. This field is optional and can be null. */
-        @IsInt()
-        @IsArray()
-        membersIds: number[];
-    
+    @IsArray()
+    @IsInt({ each: true })
+    @IsOptional()
+    mediaIds?: number[];
+
+    @IsInt()
+    eventId: number;
+
+    @IsArray()
+    @IsInt({ each: true })
+    @IsOptional()
+    tweetIds?: number[];
+
+    @IsArray()
+    @IsInt({ each: true })
+    @IsOptional()
+    memberIds?: number[];
 }

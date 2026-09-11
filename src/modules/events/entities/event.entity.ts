@@ -53,7 +53,7 @@ export class Event {
      * The media associated with the event.
      */
     @OneToMany(() => Media, (media) => media.event, { cascade: true })
-    media: Media[];
+    media: Relation<Media[]>;
 
     /**
      * The outfits associated with the event.

@@ -11,8 +11,8 @@ import { MediaType } from "../../../config/config/enum/MediaType.enum.js";
 export class Media {
 
     /** The unique identifier for the media. */
-    @PrimaryGeneratedColumn('uuid')
-    id: string;
+    @PrimaryGeneratedColumn()
+    id: number;
 
     /** The URL of the media. This field is optional and can be null. */
     @Column({ nullable: true})
