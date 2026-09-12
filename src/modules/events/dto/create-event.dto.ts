@@ -58,6 +58,7 @@ export class CreateEventDto {
    */
   @IsArray()
   @IsInt({ each: true })
+  @IsOptional()
   surpriseSongIds?: number[];
 
   /**

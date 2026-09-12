@@ -1,4 +1,4 @@
-import { IsArray, IsInt } from "class-validator";
+import { IsArray, IsInt, IsOptional } from "class-validator";
 import { IsString } from "class-validator";
 
 export class CreateLocationDto {
@@ -22,10 +22,12 @@ export class CreateLocationDto {
     /** The events associated with the location. */
     @IsInt({ each: true })
     @IsArray()
+    @IsOptional()
     eventIds: number[];
 
     /** The surprise songs associated with the location. */
     @IsInt({ each: true })
     @IsArray()
+    @IsOptional()
     surpriseSongsIds: number[];
 }
