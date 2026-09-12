@@ -9,5 +9,6 @@ import { EventsModule } from '../events/events.module.js';
   imports: [TypeOrmModule.forFeature([Media]), EventsModule],
   controllers: [MediaController],
   providers: [MediaService],
+  exports: [MediaService]
 })
 export class MediaModule {}
