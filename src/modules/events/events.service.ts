@@ -39,7 +39,7 @@ export class EventsService {
 
     await this.eventsRepository.update(id, {
       ...eventFields,
-      ...( location !== undefined && { location: { locationId }}),
+      ...( locationId !== undefined && { location: { locationId }}),
       });
 
     if (outfitIds || surpriseSongIds) {

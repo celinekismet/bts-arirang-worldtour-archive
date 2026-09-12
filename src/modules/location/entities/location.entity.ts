@@ -1,6 +1,7 @@
 import { Column, Entity, ManyToMany, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Event } from "../../events/entities/event.entity.js";
 import { SurpriseSong } from "../../surprise-song/entities/surprise-song.entity.js";
+import type { Relation } from "typeorm";
 
 /**
  * Represents a location entity in the application.
@@ -30,9 +31,9 @@ export class Location {
 
     /** The events associated with the location. */
     @OneToMany(() => Event, (event) => event.location)
-    events: Event[];
+    events: Relation<Event[]>;
 
     /** The surprise songs associated with the location. */
     @ManyToMany(() => SurpriseSong, (surpriseSongs) => surpriseSongs.locations)
-    surpriseSongs: SurpriseSong[];
+    surpriseSongs: Relation<SurpriseSong[]>;
 }
