@@ -31,5 +31,5 @@ export class HitTweet {
         nullable: true, 
         onDelete: 'CASCADE' 
     })
-    highlight: Highlight;
+    highlight: Relation<Highlight>;
 }

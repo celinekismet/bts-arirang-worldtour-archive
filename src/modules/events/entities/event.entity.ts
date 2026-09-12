@@ -59,7 +59,7 @@ export class Event {
      * The outfits associated with the event.
      */
     @ManyToMany(() => Outfit, (outfit) => outfit.events)
-    outfits: Outfit[];
+    outfits: Relation<Outfit[]>;
 
     /**
      * The highlights associated with the event.
@@ -84,5 +84,5 @@ export class Event {
      * The location associated with the event.
      */
     @ManyToOne(() => Location, (location) => location.events)
-    location: Location;
+    location: Relation<Location>;
 }

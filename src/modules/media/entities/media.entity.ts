@@ -3,6 +3,7 @@ import { Event } from "../../events/entities/event.entity.js";
 import { Highlight } from "../../highlights/entities/highlight.entity.js";
 import { Member } from "../../member/entities/member.entity.js";
 import { MediaType } from "../../../config/config/enum/MediaType.enum.js";
+import type { Relation } from "typeorm";
 
 /**
  * Represents a media entity in the application.
@@ -36,12 +37,12 @@ export class Media {
 
     /** The event associated with the media. */
     @ManyToOne(() => Event, (event) => event.media, { onDelete: 'CASCADE' })
-    event: Event;
+    event: Relation<Event>;
 
     /** The highlights associated with the media. */
     @ManyToMany(() => Highlight, (highlight) => highlight.media)
-    highlights: Highlight[];
+    highlights: Relation<Highlight[]>;
 
     @ManyToMany(() => Member, (member) => member.media)
-    members: Member[];
+    members: Relation<Member[]>;
 }

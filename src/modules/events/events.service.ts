@@ -37,7 +37,7 @@ export class EventsService {
   async update(id: number, dto: UpdateEventDto): Promise<Event | null> {
     const { locationId, outfitIds, surpriseSongIds, ...eventFields } = dto;
 
-    this.eventsRepository.update(id, {
+    await this.eventsRepository.update(id, {
       ...eventFields,
       ...( location !== undefined && { location: { locationId }}),
       });
