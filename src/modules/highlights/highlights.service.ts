@@ -33,10 +33,10 @@ export class HighlightsService {
     return this.highlightsRepository.findOne({
       where: { highlightId: id},
       relations: {
-      media: true,
-      event: true,
-      tweets: true,
-      members: true,
+        media: true,
+        event: true,
+        tweets: true,
+        members: true,
     },
     })
   }

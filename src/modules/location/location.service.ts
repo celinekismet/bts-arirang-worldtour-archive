@@ -30,7 +30,12 @@ export class LocationService {
   }
 
   findOne(id: number): Promise<Location | null> {
-    return this.locationsRepository.findOneBy( { locationId: id });
+    return this.locationsRepository.findOne( { 
+      where: {locationId: id},
+      relations: {
+        events: true,
+        surpriseSongs: true
+      } });
   }
 
   async update(id: number, updateLocationDto: UpdateLocationDto): Promise<Location | null> {

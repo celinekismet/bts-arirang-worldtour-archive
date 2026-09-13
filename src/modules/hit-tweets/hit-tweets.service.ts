@@ -29,7 +29,13 @@ export class HitTweetsService {
   }
 
   findOne(id: number): Promise<HitTweet | null> {
-    return this.hitTweetsRepository.findOneBy({ hitTweetId: id});
+    return this.hitTweetsRepository.findOne({ 
+      where: {hitTweetId: id},
+      relations: {
+        event: true,
+        highlight: true
+      }
+    });
   }
 
   async update(id: number, updateHitTweetDto: UpdateHitTweetDto): Promise<HitTweet | null> {

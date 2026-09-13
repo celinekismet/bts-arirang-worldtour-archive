@@ -31,7 +31,12 @@ export class OutfitsService {
   }
 
   findOne(id: number): Promise<Outfit | null> {
-    return this.outfitRepository.findOneBy({ outfitId : id });
+    return this.outfitRepository.findOne({ 
+      where: { outfitId : id},
+      relations: {
+        member: true
+      }
+    });
   }
 
   async update(id: number, updateOutfitDto: UpdateOutfitDto): Promise<Outfit | null> {
