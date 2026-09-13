@@ -24,11 +24,11 @@ export class Member {
 
     /** The outfits associated with the member. */
     @OneToMany(() => Outfit, (outfit) => outfit.member)
-    outfits: Relation<Outfit[]>;
+    outfit: Relation<Outfit[]>;
 
     /** The highlights associated with the member. */
     @ManyToMany(() => Highlight, (highlight) => highlight.members)
-    highlights: Highlight[];
+    highlights: Relation<Highlight[]>;
 
     /** The media associated with the member. */
     @ManyToMany(() => Media, (media) => media.members)

@@ -1,11 +1,25 @@
 import { Injectable } from '@nestjs/common';
 import { CreateSurpriseSongDto } from './dto/create-surprise-song.dto.js';
 import { UpdateSurpriseSongDto } from './dto/update-surprise-song.dto.js';
+import { SurpriseSong } from './entities/surprise-song.entity.js';
+import { Repository } from 'typeorm';
+import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 export class SurpriseSongService {
-  create(createSurpriseSongDto: CreateSurpriseSongDto) {
-    return 'This action adds a new surpriseSong';
+
+  constructor(
+    @InjectRepository(SurpriseSong)
+    private readonly surpriseSongRepository: Repository<SurpriseSong>
+  ){}
+
+  create(createSurpriseSongDto: CreateSurpriseSongDto): Promise<SurpriseSong> {
+    const { eventId, locationId, ...surpriseSongFields} = createSurpriseSongDto;
+
+    this.surpriseSongRepository.create({
+      ...surpriseSongFields,
+      event: 
+    })
   }
 
   findAll() {
