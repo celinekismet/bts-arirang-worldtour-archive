@@ -35,15 +35,17 @@ export class OutfitsService {
   }
 
   async update(id: number, updateOutfitDto: UpdateOutfitDto): Promise<Outfit | null> {
-    const { memberId, ...outfitFields} = updateOutfitDto;
+    const { memberId, ...outfitFields } = updateOutfitDto;
 
-    const outfit = await this.outfitRepository.update( id,
-      
-    )
+    await this.outfitRepository.update(id, {
+      ...outfitFields,
+      ...(memberId !== undefined && { member: { memberId } }),
+    });
 
+    return this.findOne(id);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} outfit`;
+  remove(id: number): Promise<void> {
+    return this.outfitRepository.delete(id).then(() => undefined);
   }
 }

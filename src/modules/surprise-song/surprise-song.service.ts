@@ -14,27 +14,55 @@ export class SurpriseSongService {
   ){}
 
   create(createSurpriseSongDto: CreateSurpriseSongDto): Promise<SurpriseSong> {
-    const { eventId, locationId, ...surpriseSongFields} = createSurpriseSongDto;
+    const { eventIds, locationIds, ...surpriseSongFields} = createSurpriseSongDto;
 
-    this.surpriseSongRepository.create({
+    const surpriseSong = this.surpriseSongRepository.create({
       ...surpriseSongFields,
-      event: 
+      events: eventIds?.map((id) => ({ eventId: id })), 
+      locations: locationIds?.map((id) => ({ locationId: id })), 
+    })
+
+    return this.surpriseSongRepository.save(surpriseSong);
+  }
+
+  findAll(): Promise<SurpriseSong[]> {
+    return this.surpriseSongRepository.find();
+  }
+
+  findOne(id: number): Promise<SurpriseSong | null> {
+    return this.surpriseSongRepository.findOne({
+      where: { surpriseSongId: id},
+      relations: {
+        events: true,
+        locations: true
+      }
     })
   }
 
-  findAll() {
-    return `This action returns all surpriseSong`;
+  async update(id: number, updateSurpriseSongDto: UpdateSurpriseSongDto): Promise<SurpriseSong | null> {
+    const { eventIds, locationIds, ...surpriseSongFields} = updateSurpriseSongDto;
+
+    await this.surpriseSongRepository.update(id, {
+      ...surpriseSongFields,
+    });
+
+    if(eventIds || locationIds) {
+      const surpriseSong = await this.surpriseSongRepository.findOneBy({ surpriseSongId: id });
+      if (surpriseSong){
+        if (eventIds){
+          surpriseSong.events = eventIds.map((eventId) => ({eventId})) as any;
+        }
+        if(locationIds){
+          surpriseSong.locations = locationIds.map((locationId) => ({locationId})) as any;
+        }
+        await this.surpriseSongRepository.save(surpriseSong);
+      }
+    }
+    return this.findOne(id);
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} surpriseSong`;
-  }
 
-  update(id: number, updateSurpriseSongDto: UpdateSurpriseSongDto) {
-    return `This action updates a #${id} surpriseSong`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} surpriseSong`;
+  remove(id: number): Promise<void> {
+    return this.surpriseSongRepository.delete(id).then(() => undefined);
   }
 }

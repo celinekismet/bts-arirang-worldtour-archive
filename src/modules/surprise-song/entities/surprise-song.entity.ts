@@ -1,4 +1,5 @@
 import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
+import type { Relation } from "typeorm";
 import { Event } from "../../events/entities/event.entity.js";
 import { Location } from "../../location/entities/location.entity.js";
 
@@ -13,22 +14,22 @@ export class SurpriseSong {
     surpriseSongId: number;
 
     /** The album to which the surprise song belongs. */
-    @Column("simple-array")
+    @Column('text', { array: true })
     album: string[];
 
     /** The title of the surprise song. */
-    @Column("simple-array")
-    title: string[];
+    @Column()
+    title: string;
 
     /** The release date of the surprise song. */
-    @Column()
+    @Column({ type: 'date' })
     releaseDate: Date;
 
     /** The events associated with the surprise song. */
     @ManyToMany(() => Event, (event) => event.surpriseSongs)
-    events: Event[];
+    events: Relation<Event[]>;
 
     /** The locations associated with the surprise song. */
     @ManyToMany(() => Location, (location) => location.surpriseSongs)
-    locations: Location[];
+    locations: Relation<Location[]>;
 }
