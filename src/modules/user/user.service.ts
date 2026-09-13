@@ -4,7 +4,7 @@ import { UpdateUserDto } from './dto/update-user.dto.js';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './entities/user.entity.js';
 import { Repository } from 'typeorm';
-import bcrypt from 'bcrypt';
+import * as bcrypt from 'bcrypt';
 
 
 @Injectable()
@@ -35,18 +35,37 @@ export class UserService {
   }
 
   findAll(): Promise<User[]> {
-    return this.userRepository.find()
+    return this.userRepository.find();
   }
 
   findOne(id: number): Promise<User | null>{
     return this.userRepository.findOneBy({ userId: id})
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+  async update(id: number, updateUserDto: UpdateUserDto): Promise<Omit<User, 'password'> | null> {
+    const { password, ...userFields} = updateUserDto;
+
+    const dataToUpdate: Partial<User> = { ...userFields};
+
+    // on hash seulement si un nouvea pwd est fourni
+    if (password) {
+      dataToUpdate.password = await bcrypt.hash(password, 10);
+    }
+
+    await this.userRepository.update(id, dataToUpdate);
+
+    const updatedUser = await this.findOne(id);
+
+    if(!updatedUser) {
+      return null;
+    }
+
+    // on retire le pwd du résultat final
+    const { password: _, ...result} = updatedUser;
+    return result;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} user`;
+  remove(id: number): Promise<void> {
+    return this.userRepository.delete(id).then(() => undefined);
   }
 }
