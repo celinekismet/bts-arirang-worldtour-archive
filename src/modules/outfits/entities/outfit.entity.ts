@@ -31,6 +31,6 @@ export class Outfit {
     events: Relation<Event[]>;
 
     /** The member associated with the outfit. */
-    @ManyToOne(() => Member, (member) => member.outfits)
+    @ManyToOne(() => Member, (member) => member.outfit)
     member: Relation<Member>;
 }

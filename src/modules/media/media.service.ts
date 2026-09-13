@@ -10,34 +10,41 @@ export class MediaService {
 
   constructor(
     @InjectRepository(Media)
-    private readonly mediaReposityory: Repository<Media>
+    private readonly mediaRepository: Repository<Media>
   ){}
 
   create(createMediaDto: CreateMediaDto): Promise<Media> {
     const {eventId, highlightIds, memberIds, ...mediaFields } = createMediaDto;
     
-    const media = this.mediaReposityory.create({
+    const media = this.mediaRepository.create({
       ...mediaFields,
       event: { eventId },
       highlights: highlightIds?.map((id) => ({highlightId: id})),
       members: memberIds?.map((id) => ({ memberId: id}))
     })
 
-    return this.mediaReposityory.save(media)
+    return this.mediaRepository.save(media)
   }
 
   findAll(): Promise<Media[]> {
-    return this.mediaReposityory.find();
+    return this.mediaRepository.find();
   }
 
   findOne(id: number): Promise<Media | null> {
-    return this.mediaReposityory.findOneBy( { id: id });
+    return this.mediaRepository.findOne({ 
+      where: {id: id},
+      relations: {
+        event: true,
+        highlights: true,
+        members: true,
+      },
+    });
   }
 
   async update(id: number, updateMediaDto: UpdateMediaDto): Promise<Media | null> {
     const {eventId, highlightIds, memberIds, ...mediaFields } = updateMediaDto;
 
-    const media = await this.mediaReposityory.update(id, {
+    const media = await this.mediaRepository.update(id, {
       ...mediaFields,
       ...(eventId  !== undefined && { event: { eventId }}),
       ...( highlightIds !== undefined && { highlight : { highlightIds }} )
@@ -47,6 +54,6 @@ export class MediaService {
   }
 
   remove(id: number): Promise<void> {
-    return this.mediaReposityory.delete(id).then(() => undefined );
+    return this.mediaRepository.delete(id).then(() => undefined );
   }
 }

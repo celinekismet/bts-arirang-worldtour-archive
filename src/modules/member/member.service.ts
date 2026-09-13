@@ -30,7 +30,14 @@ export class MemberService {
   }
 
   findOne(id: number): Promise<Member | null> {
-    return this.memberRepository.findOneBy({ memberId: id })
+    return this.memberRepository.findOne({
+      where: { memberId: id },
+      relations: {
+        outfit: true,
+        highlights: true,
+        media: true,
+      },
+    });
   }
 
   async update(id: number, updateMemberDto: UpdateMemberDto): Promise<Member | null> {
