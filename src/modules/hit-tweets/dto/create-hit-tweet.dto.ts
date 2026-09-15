@@ -1,4 +1,4 @@
-import { IsInt, IsString } from "class-validator";
+import { IsInt, IsOptional, IsString } from "class-validator";
 
 export class CreateHitTweetDto {
 
@@ -16,5 +16,6 @@ export class CreateHitTweetDto {
 
     /** The highlight associated with the tweet. */
     @IsInt()
+    @IsOptional()
     highlightId: number;
 }

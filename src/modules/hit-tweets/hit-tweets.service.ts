@@ -16,10 +16,10 @@ export class HitTweetsService {
   create(createHitTweetDto: CreateHitTweetDto): Promise<HitTweet> {
     const { eventId, highlightId, ...hitTweetFields} = createHitTweetDto;
     
-    const hitTweet = this.hitTweetsRepository.create({ 
+    const hitTweet = this.hitTweetsRepository.create({
       ...hitTweetFields,
       event: { eventId },
-      highlight: {highlightId } 
+      ...(highlightId !== undefined && { highlight: { highlightId } }),
     });
     return this.hitTweetsRepository.save(hitTweet);
   }
