@@ -1,6 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { LocationController } from './location.controller.js';
 import { LocationService } from './location.service.js';
+import { vi } from 'vitest';
 
 describe('LocationController', () => {
   let controller: LocationController;
@@ -8,7 +9,18 @@ describe('LocationController', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [LocationController],
-      providers: [LocationService],
+      providers: [
+        {
+          provide: LocationService,
+          useValue: {
+            create: vi.fn(),
+            findAll: vi.fn(),
+            findOne: vi.fn(),
+            update: vi.fn(),
+            remove: vi.fn(),
+          },
+        },
+      ],
     }).compile();
 
     controller = module.get<LocationController>(LocationController);
