@@ -7,7 +7,7 @@ import { Observable } from "rxjs";
   providedIn: 'root',
 })
 export class EventService {
-    private readonly apiUrl = `${ environment.apiUrl }/event`
+    private readonly apiUrl = `${ environment.apiUrl }/events`
 
     constructor(private http: HttpClient ){}
 
