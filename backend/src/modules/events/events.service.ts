@@ -1,9 +1,12 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { CreateEventDto } from './dto/create-event.dto.js';
-import { Repository } from 'typeorm';
+import { In, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UpdateEventDto } from './dto/update-event.dto.js';
 import { Event } from './entities/event.entity.js';
+import { Location } from '../location/entities/location.entity.js';
+import { Outfit } from '../outfits/entities/outfit.entity.js';
+import { SurpriseSong } from '../surprise-song/entities/surprise-song.entity.js';
 
 @Injectable()
 export class EventsService {
@@ -11,11 +14,50 @@ export class EventsService {
   constructor(
     @InjectRepository(Event)
     private readonly eventsRepository: Repository<Event>,
+    @InjectRepository(Location)
+    private readonly locationsRepository: Repository<Location>,
+    @InjectRepository(Outfit)
+    private readonly outfitsRepository: Repository<Outfit>,
+    @InjectRepository(SurpriseSong)
+    private readonly surpriseSongsRepository: Repository<SurpriseSong>,
   ) {}
 
-  create(dto: CreateEventDto): Promise<Event> {
+  private async validateRelations(locationId?: number, outfitIds?: number[], surpriseSongIds?: number[]) {
+    if (locationId !== undefined) {
+      const location = await this.locationsRepository.findOneBy({ locationId });
+      if (!location) {
+        throw new BadRequestException(`Location ${locationId} does not exist.`);
+      }
+    }
+
+    if (outfitIds && outfitIds.length > 0) {
+      const uniqueOutfitIds = [...new Set(outfitIds)];
+      const existingOutfits = await this.outfitsRepository.findBy({ outfitId: In(uniqueOutfitIds) });
+      const existingIds = new Set(existingOutfits.map((outfit) => outfit.outfitId));
+      const missingIds = uniqueOutfitIds.filter((id) => !existingIds.has(id));
+
+      if (missingIds.length > 0) {
+        throw new BadRequestException(`Outfit IDs do not exist: ${missingIds.join(', ')}`);
+      }
+    }
+
+    if (surpriseSongIds && surpriseSongIds.length > 0) {
+      const uniqueSurpriseSongIds = [...new Set(surpriseSongIds)];
+      const existingSurpriseSongs = await this.surpriseSongsRepository.findBy({ surpriseSongId: In(uniqueSurpriseSongIds) });
+      const existingIds = new Set(existingSurpriseSongs.map((song) => song.surpriseSongId));
+      const missingIds = uniqueSurpriseSongIds.filter((id) => !existingIds.has(id));
+
+      if (missingIds.length > 0) {
+        throw new BadRequestException(`Surprise song IDs do not exist: ${missingIds.join(', ')}`);
+      }
+    }
+  }
+
+  async create(dto: CreateEventDto): Promise<Event> {
     const { locationId, outfitIds, surpriseSongIds, ...eventFields } = dto;
-    
+
+    await this.validateRelations(locationId, outfitIds, surpriseSongIds);
+
     const event = this.eventsRepository.create({
         ...eventFields,
         location: { locationId },
@@ -36,6 +78,8 @@ export class EventsService {
 
   async update(id: number, dto: UpdateEventDto): Promise<Event | null> {
     const { locationId, outfitIds, surpriseSongIds, ...eventFields } = dto;
+
+    await this.validateRelations(locationId, outfitIds, surpriseSongIds);
 
     await this.eventsRepository.update(id, {
       ...eventFields,

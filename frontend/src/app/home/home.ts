@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { EventService } from '../core/services/event';
 
 @Component({
   imports: [],
@@ -6,4 +7,18 @@ import { Component } from '@angular/core';
   styleUrl: './home.css',
   templateUrl: './home.html',
 })
-export class Home {}
+export class Home {
+  events: Event[] = [];
+
+  constructor(private eventService: EventService) {}
+
+  public ngOnInit(): void {
+    this.eventService.getAll().subscribe({
+      next: (data) => {
+        this.events = data;
+        console.log('event reçu: ', data);
+      },
+      error: (err) => console.error('erreur api: ', err),
+    })
+  }
+}
