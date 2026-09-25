@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { EventService } from '../core/services/event';
+import { Event } from '../components/event/event';
 
 @Component({
   imports: [],
