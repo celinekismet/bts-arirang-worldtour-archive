@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { EventService } from '../core/services/event';
 import { Event } from '../components/event/event';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   imports: [],
@@ -9,11 +10,14 @@ import { Event } from '../components/event/event';
   templateUrl: './home.html',
 })
 export class Home {
-  events: Event[] = [];
+  public events: Event[] = [];
+  private translate = inject(TranslateService);
+  private eventService = inject(EventService);  
 
-  constructor(private eventService: EventService) {}
+  constructor() {}
 
   public ngOnInit(): void {
+    this.translate.use('en');
     this.eventService.getAll().subscribe({
       next: (data) => {
         this.events = data;
