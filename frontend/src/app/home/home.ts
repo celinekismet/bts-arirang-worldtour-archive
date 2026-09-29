@@ -1,15 +1,16 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { EventService } from '../core/services/event';
 import { Event } from '../components/event/event';
 import { TranslateService } from '@ngx-translate/core';
+import { SHARED_MODULES } from '../shared/shared-modules';
 
 @Component({
-  imports: [],
+  imports: [...SHARED_MODULES],
   selector: 'app-home',
   styleUrl: './home.css',
   templateUrl: './home.html',
 })
-export class Home {
+export class Home implements OnInit {
   public events: Event[] = [];
   private translate = inject(TranslateService);
   private eventService = inject(EventService);  
