@@ -4,6 +4,7 @@ import { Event } from '../components/event/event';
 import { TranslateService } from '@ngx-translate/core';
 import { SHARED_MODULES } from '../shared/shared-modules';
 
+
 @Component({
   imports: [...SHARED_MODULES],
   selector: 'app-home',
