@@ -1,1 +1,23 @@
-<p>header works!</p>
+<header class="sticky top-0 z-10 backdrop-blur-md bg-bg/70 border-b border-border px-6 py-5 flex items-center justify-between">
+
+  <a routerLink="/" class="font-serif text-xl bg-gradient-to-r from-accent to-accent-2 bg-clip-text text-transparent">
+    Arirang Archive
+  </a>
+
+  <nav class="hidden md:flex gap-6">
+    <a routerLink="/timeline" class="text-text-dim text-sm font-medium hover:text-text transition-colors">
+      {{ 'nav.timeline' | translate }}
+    </a>
+    <a routerLink="/gallery" class="text-text-dim text-sm font-medium hover:text-text transition-colors">
+      {{ 'nav.gallery' | translate }}
+    </a>
+    <a routerLink="/community" class="text-text-dim text-sm font-medium hover:text-text transition-colors">
+      {{ 'nav.community' | translate }}
+    </a>
+  </nav>
+
+  <button class="md:hidden text-text-dim" aria-label="Menu">
+    ☰
+  </button>
+
+</header>

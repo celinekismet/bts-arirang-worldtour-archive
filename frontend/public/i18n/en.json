@@ -1,5 +1,15 @@
 {
-    "home": {
-        "title" : "BTS Arirang World Tour Archive"
-    }
+  "home": {
+    "title": "BTS Arirang World Tour",
+    "noEvents": "Aucun concert pour l'instant."
+  },
+  "nav": {
+    "timeline": "Chronologie",
+    "gallery": "Galerie",
+    "community": "Communauté"
+  },
+  "event": {
+    "ticketsSold": "Billets vendus",
+    "attendance": "Affluence"
+  }
 }
