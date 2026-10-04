@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { environment } from "../../../environments/environment";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
+import { EventDto } from "../models/event.model";
 
 @Injectable({
   providedIn: 'root',
@@ -15,11 +16,11 @@ export class EventService {
         return this.http.post<Event>(this.apiUrl, body);
     }
 
-    getAll(): Observable<Event[]>{
-        return this.http.get<Event[]>(this.apiUrl)
+    getAll(): Observable<EventDto[]> {
+    return this.http.get<EventDto[]>(this.apiUrl);
     }
 
-    getOne(id: number): Observable<Event> {
-        return this.http.get<Event>(`${ this.apiUrl}/${id}`)
+    getOne(id: number): Observable<EventDto> {
+    return this.http.get<EventDto>(`${this.apiUrl}/${id}`);
     }
 }

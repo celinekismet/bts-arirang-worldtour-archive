@@ -4,7 +4,6 @@ import { TranslateService } from '@ngx-translate/core';
 import { SHARED_MODULES } from '../shared/shared-modules';
 import { EventDto } from '../core/models/event.model';
 
-
 @Component({
   imports: [...SHARED_MODULES],
   selector: 'app-home',
@@ -12,13 +11,11 @@ import { EventDto } from '../core/models/event.model';
   templateUrl: './home.html',
 })
 export class Home implements OnInit {
-  public events: Event[] = [];
+  public events: EventDto[] = [];
   private translate = inject(TranslateService);
-  private eventService = inject(EventService);  
+  private eventService = inject(EventService);
 
-  constructor() {}
-
-    ngOnInit(): void {
+  ngOnInit(): void {
     this.eventService.getAll().subscribe({
       next: (data) => {
         this.events = data.sort(
@@ -29,11 +26,11 @@ export class Home implements OnInit {
     });
   }
 
-  get heroEvent(): Event | undefined {
+  get heroEvent(): EventDto | undefined {
     return this.events[0];
   }
 
-  get otherEvents(): Event[] {
+  get otherEvents(): EventDto[] {
     return this.events.slice(1, 4);
   }
 }
