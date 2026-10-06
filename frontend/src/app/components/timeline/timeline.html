@@ -2,8 +2,8 @@
     @for (event of events; track event.eventId) {
         <button
             type="button"
-            [disabled]="isPastEvent(event.date)"
-            (click)="goToEvent(event.eventId)"
+            [disabled]="!isPastEvent(event)"
+            (click)="goToEvent(event)"
             [attr.aria-disabled]="!isPastEvent(event)"
             class="isPast(event)
             ? 'border-border bg-bg-elevated backdrop-blur-md hover:border-accent hover:-translate-y-1 cursor-pointer'
