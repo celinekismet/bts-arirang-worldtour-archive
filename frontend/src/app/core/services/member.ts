@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { environment } from "../../../environments/environment.prod";
+import { environment } from "../../../environments/environment";
 import { HttpClient } from "@angular/common/http";
 import { MemberDto } from "../models/member.model";
 import { Observable } from "rxjs";
@@ -7,7 +7,7 @@ import { Observable } from "rxjs";
 @Injectable({
   providedIn: 'root',
 })
-export class Member {
+export class MemberService {
 
     private readonly apiUrl = `${ environment.apiUrl }/members`
     

@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { environment } from "../../../environments/environment.prod";
+import { environment } from "../../../environments/environment";
 import { HttpClient } from "@angular/common/http";
 import { HitTweetDto } from "../models/hitTweet.model";
 import { Observable } from "rxjs/internal/Observable";
@@ -7,7 +7,7 @@ import { Observable } from "rxjs/internal/Observable";
 @Injectable({
   providedIn: 'root',
 })
-export class HitTweet {
+export class HitTweetService {
     private readonly apiUrl = `${ environment.apiUrl }/hit-tweets`
 
     constructor(private http: HttpClient ){}

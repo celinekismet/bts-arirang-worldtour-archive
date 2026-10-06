@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { environment } from "../../../environments/environment.prod";
+import { environment } from "../../../environments/environment";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { OutfitsDto } from "../models/outfit.model";
@@ -7,7 +7,7 @@ import { OutfitsDto } from "../models/outfit.model";
 @Injectable({
   providedIn: 'root',
 })
-export class Outfits {
+export class OutfitsService {
 
     private readonly apiUrl = `${ environment.apiUrl }/outfits`
 

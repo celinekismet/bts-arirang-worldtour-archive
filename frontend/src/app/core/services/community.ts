@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { environment } from "../../../environments/environment.prod";
+import { environment } from "../../../environments/environment";
 import { HttpClient } from "@angular/common/http";
 import { CommunityDto } from "../models/community.model";
 import { Observable } from "rxjs/internal/Observable";
@@ -7,7 +7,7 @@ import { Observable } from "rxjs/internal/Observable";
 @Injectable({
   providedIn: 'root',
 })
-export class Community {
+export class CommunityService {
 
     private readonly apiUrl = `${ environment.apiUrl }/communities`
 

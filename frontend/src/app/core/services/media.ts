@@ -7,7 +7,7 @@ import { Observable } from "rxjs";
 @Injectable({
   providedIn: 'root',
 })
-export class Media {
+export class MediaService {
 
     private readonly apiUrl = `${ environment.apiUrl }/media`
 
