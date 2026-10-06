@@ -1,0 +1,14 @@
+<div class="flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory">
+    @for (event of events; track event.eventId) {
+        <button
+            (click)="goToEvent(event.eventId)"
+            class="min-w-[170px] text-left rounded-2x1 border border-border bg-bg-elevated backdrop-blur-md
+            p-4 snap-start hover:border-accent hover:-translate-y-1 translate-all cursor-pointer">
+            <span class="block w-2 h-2 rounded-full bg-accent mb-3"></span>
+            <h4 class="font-serif text-sm">{{ event.location.city }}</h4>
+            <span class="text-text-dim text-xs">{{ event.date }}</span>
+        </button>
+    } @empty {
+        <div class="text-text-dim text-sm">No events available.</div>
+    }
+</div>
