@@ -1,14 +1,31 @@
 <div class="flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory">
     @for (event of events; track event.eventId) {
         <button
+            type="button"
+            [disabled]="isPastEvent(event.date)"
             (click)="goToEvent(event.eventId)"
-            class="min-w-[170px] text-left rounded-2x1 border border-border bg-bg-elevated backdrop-blur-md
-            p-4 snap-start hover:border-accent hover:-translate-y-1 translate-all cursor-pointer">
-            <span class="block w-2 h-2 rounded-full bg-accent mb-3"></span>
+            [attr.aria-disabled]="!isPastEvent(event)"
+            class="isPast(event)
+            ? 'border-border bg-bg-elevated backdrop-blur-md hover:border-accent hover:-translate-y-1 cursor-pointer'
+            : 'border-border/50 bg-bg-elevated/40 opacity-50 cursor-not-allowed'">
+            <span 
+                class="block w-2 h-2 rounded-full mb-3"
+                [class]="isPastEvent(event) ? 'bg-accent': 'bg-text-dim'">
+            </span>
             <h4 class="font-serif text-sm">{{ event.location.city }}</h4>
             <span class="text-text-dim text-xs">{{ event.date }}</span>
+        
+            @if (!isPastEvent(event)) {
+                <span class="block text-xs text-text-dim mt-2 italic">
+                    {{ 'timeline.upcoming' | translate }}
+                </span>
+            }
         </button>
-    } @empty {
-        <div class="text-text-dim text-sm">No events available.</div>
     }
+
+    <div class="min-w-[1rem] rounded-2x1 border border-dashed border-border/60 p-4 flex items-center justify-center text-center">
+        <span class="text-text-dim text-sm">
+            {{ 'timeline.moreToCome' | translate }}
+        </span>
+    </div>
 </div>

@@ -1,15 +1,21 @@
 {
   "home": {
     "title": "BTS Arirang World Tour",
-    "noEvents": "Aucun concert pour l'instant."
+    "noEvents": "No concerts at the moment"
   },
   "nav": {
     "timeline": "Chronologie",
-    "gallery": "Galerie",
-    "community": "Communauté"
+    "gallery": "Galery",
+    "community": "Community"
   },
   "event": {
-    "ticketsSold": "Billets vendus",
-    "attendance": "Affluence"
+    "ticketsSold": "Tickets sold",
+    "attendance": "Attendance",
+    "location": "Location",
+    "date": "Date"
+  },
+  "timeline": {
+    "upcoming": "Upcoming",
+    "moreToCome": "More to come"
   }
 }
