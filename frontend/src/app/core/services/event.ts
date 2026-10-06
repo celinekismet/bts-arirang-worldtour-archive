@@ -12,8 +12,8 @@ export class EventService {
 
     constructor(private http: HttpClient ){}
 
-    create(body?: any): Observable<Event> {
-        return this.http.post<Event>(this.apiUrl, body);
+    create(body?: any): Observable<EventDto> {
+        return this.http.post<EventDto>(this.apiUrl, body);
     }
 
     getAll(): Observable<EventDto[]> {

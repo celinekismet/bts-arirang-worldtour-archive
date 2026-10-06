@@ -1,4 +1,26 @@
-import { Service } from '@angular/core';
+import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { environment } from "../../../environments/environment.prod";
+import { HighlightDto } from "../models/highlight.model";
+import { Observable } from "rxjs";
 
-@Service()
-export class Highlight {}
+@Injectable({
+  providedIn: 'root',
+})
+export class Highlight {
+    private readonly apiUrl = `${ environment.apiUrl }/highlights`
+
+    constructor(private http: HttpClient) {}
+
+    create(body?: any): Observable<HighlightDto> {
+        return this.http.post<HighlightDto>(this.apiUrl, body);
+    }
+
+    getAll(): Observable<HighlightDto[]> {
+        return this.http.get<HighlightDto[]>(this.apiUrl);
+    }
+
+    getOne(id: number): Observable<HighlightDto> {
+        return this.http.get<HighlightDto>(`${this.apiUrl}/${id}`);
+    }
+}
