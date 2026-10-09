@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { environment } from "../../../environments/environment";
 import { HttpClient } from "@angular/common/http";
 import { HitTweetDto } from "../models/hitTweet.model";
-import { Observable } from "rxjs/internal/Observable";
+import { Observable } from "rxjs";
 
 @Injectable({
   providedIn: 'root',
