@@ -9,7 +9,7 @@ import { Observable } from "rxjs/internal/Observable";
 })
 export class CommunityService {
 
-    private readonly apiUrl = `${ environment.apiUrl }/communities`
+    private readonly apiUrl = `${ environment.apiUrl }/community`
 
     constructor(private http: HttpClient ){}
 

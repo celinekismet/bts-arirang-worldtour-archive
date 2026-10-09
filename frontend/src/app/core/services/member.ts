@@ -9,7 +9,7 @@ import { Observable } from "rxjs";
 })
 export class MemberService {
 
-    private readonly apiUrl = `${ environment.apiUrl }/members`
+    private readonly apiUrl = `${ environment.apiUrl }/member`
     
     constructor(private http: HttpClient ){}
 

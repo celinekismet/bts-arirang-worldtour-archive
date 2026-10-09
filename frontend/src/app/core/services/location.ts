@@ -9,7 +9,7 @@ import { LocationDto } from "../models/location.model";
 })
 export class LocationService {
 
-    private readonly apiUrl = `${ environment.apiUrl }/locations`
+    private readonly apiUrl = `${ environment.apiUrl }/location`
 
     constructor(private http: HttpClient) {}
 
