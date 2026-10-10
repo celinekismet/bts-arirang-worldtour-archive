@@ -12,7 +12,7 @@
                 class="block w-2 h-2 rounded-full mb-3"
                 [class]="isPastEvent(event) ? 'bg-accent': 'bg-text-dim'">
             </span>
-            <h4 class="font-serif text-sm">{{ event.location.city }}</h4>
+            <h4 class="font-serif text-sm">{{ event.location?.city }}</h4>
             <span class="text-text-dim text-xs">{{ event.date }}</span>
         
             @if (!isPastEvent(event)) {
