@@ -6,5 +6,5 @@ export interface HitTweetDto {
     content: string;
     note: string;
     event: EventDto;
-    highlight: HighlightDto;
+    highlight?: HighlightDto;
 }

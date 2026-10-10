@@ -7,5 +7,5 @@ export interface OutfitsDto {
     description: string;
     designer: string;
     events: EventDto[];
-    member: MemberDto;
+    member?: MemberDto;
 }

@@ -7,15 +7,15 @@ import { SurpriseSongDto } from "./surpriseSongs.model";
 
 export interface EventDto {
     eventId: number;
-    date: Date;
-    setlist: string[];
-    ticketsSold: number;
-    revenue: number;
-    attendance: number;
-    media: MediaDto[];
-    outfits: OutfitsDto[];
-    highlights: HighlightDto[];
-    tweets: HitTweetDto[];
-    surpriseSongs: SurpriseSongDto[];
-    location: LocationDto;
+    date: string;
+    setlist: string[] | null;
+    ticketsSold: number | null;
+    revenue: number | null;
+    attendance: number | null;
+    media?: MediaDto[];
+    outfits?: OutfitsDto[];
+    highlights?: HighlightDto[];
+    tweets?: HitTweetDto[];
+    surpriseSongs?: SurpriseSongDto[];
+    location?: LocationDto;
 }

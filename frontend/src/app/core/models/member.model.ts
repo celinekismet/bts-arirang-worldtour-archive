@@ -7,6 +7,6 @@ export interface MemberDto {
     name: string;
     stageName: string;
     outfit: OutfitsDto[];
-    highlights: HighlightDto[];
-    media: MediaDto[];
+    highlights?: HighlightDto[];
+    media?: MediaDto[];
 }

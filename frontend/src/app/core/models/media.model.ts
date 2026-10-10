@@ -5,12 +5,12 @@ import { MemberDto } from "./member.model";
 
 export interface MediaDto {
     id: number;
-    url: string;
+    url?: string;
     type: MediaType;
     description: string;
     credit: string;
-    note: string;
+    note?: string | null;
     event: EventDto;
-    highlights: HighlightDto[];
-    members: MemberDto[];
+    highlight?: HighlightDto[];
+    members?: MemberDto[];
 }

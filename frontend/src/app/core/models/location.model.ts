@@ -7,6 +7,6 @@ export interface LocationDto {
     city: string;
     venue: string;
     address: string;
-    events: EventDto[];
-    surpriseSongs: SurpriseSongDto[];
+    events?: EventDto[];
+    surpriseSongs?: SurpriseSongDto[];
 }

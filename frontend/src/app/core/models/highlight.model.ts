@@ -7,9 +7,8 @@ export interface HighlightDto {
     highlightId: number;
     title: string;
     description: string;
-    media: MediaDto[];
+    media?: MediaDto[];
     event: EventDto;
-    tweets: HitTweetDto[];
-    members: MemberDto[];
-
+    tweets?: HitTweetDto[];
+    members?: MemberDto[];
 }
