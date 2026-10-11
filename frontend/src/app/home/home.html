@@ -1,7 +1,31 @@
-<div class="min-h-screen bg-bg text-text p-8">
-  <h1 class="font-serif text-3xl text-accent mb-2">Arirang Archive</h1>
-  <p class="font-sans text-text-dim">Test de la nouvelle palette</p>
-  <div class="mt-4 p-4 bg-bg-elevated border border-border rounded-2xl backdrop-blur-md">
-    Carte avec effet verre
+<main class="max-w-6xl mx-auto px-6 py-10">
+
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-4 auto-rows-[140px] mb-12">
+
+    @if (heroEvent; as hero) {
+      <div class="md:col-span-2 md:row-span-2 rounded-2xl border border-border bg-bg-elevated backdrop-blur-md p-6 flex flex-col justify-end">
+        <span class="text-xs uppercase tracking-wider text-gold mb-1">
+          {{ 'home.nextConcert' | translate }}
+        </span>
+        <h2 class="font-serif text-2xl">
+          {{ hero.location?.city }} · {{ hero.location?.venue }}
+        </h2>
+        <p class="text-text-dim text-sm mt-1">{{ hero.date }}</p>
+      </div>
+    } @else {
+      <div class="md:col-span-2 md:row-span-2 rounded-2xl border border-border bg-bg-elevated p-6 flex items-center justify-center text-text-dim">
+        {{ 'home.noEvents' | translate }}
+      </div>
+    }
+
+    @for (event of otherEvents; track event.eventId) {
+      <div class="rounded-2xl border border-border bg-bg-elevated backdrop-blur-md p-5 flex flex-col justify-end">
+        <span class="text-xs uppercase tracking-wider text-accent mb-1">{{ event.date }}</span>
+        <h3 class="font-serif text-lg">{{ event.location?.city }}</h3>
+        <p class="text-text-dim text-sm">{{ event.location?.venue }}</p>
+      </div>
+    }
+
   </div>
-</div>
+
+</main>
