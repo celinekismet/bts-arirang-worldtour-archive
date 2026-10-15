@@ -69,11 +69,24 @@ export class EventsService {
 
 
   findAll(): Promise<Event[]> {
-    return this.eventsRepository.find();
+    return this.eventsRepository.find({
+      relations: { location: true },
+      order: { date: 'ASC' },
+    });
   }
 
   findOne(id: number): Promise<Event | null> {
-    return this.eventsRepository.findOneBy({ eventId: id });
+    return this.eventsRepository.findOne({
+      where: { eventId: id },
+      relations: {
+        location: true,
+        media: true,
+        outfits: true,
+        highlights: true,
+        tweets: true,
+        surpriseSongs: true,
+      },
+    });
   }
 
   async update(id: number, dto: UpdateEventDto): Promise<Event | null> {
