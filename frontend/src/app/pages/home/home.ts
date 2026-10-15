@@ -1,8 +1,8 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { EventService } from '../core/services/event';
+import { EventService } from '../../core/services/event';
 import { TranslateService } from '@ngx-translate/core';
-import { SHARED_MODULES } from '../shared/shared-modules';
-import { EventDto } from '../core/models/event.model';
+import { SHARED_MODULES } from '../../shared/shared-modules';
+import { EventDto } from '../../core/models/event.model';
 
 @Component({
   imports: [...SHARED_MODULES],
